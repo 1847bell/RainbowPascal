@@ -1,0 +1,67 @@
+{
+  "name": "rainbow-pascal",
+  "displayName": "Rainbow Pascal",
+  "description": "Structural rainbow coloring for Pascal begin/end and if/then/else keywords.",
+  "icon": "image/icon.png",
+  "version": "0.3.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:pascal",
+    "onLanguage:objectpascal",
+    "onLanguage:delphi",
+    "onCommand:rainbowPascal.openColorPicker"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rainbowPascal.openColorPicker",
+        "title": "Choose Nesting Colors",
+        "category": "Rainbow Pascal"
+      }
+    ],
+    "configuration": {
+      "title": "Rainbow Pascal",
+      "properties": {
+        "rainbowPascal.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "order": 1,
+          "description": "Color Pascal block keywords by structural nesting depth."
+        },
+        "rainbowPascal.colors": {
+          "type": "array",
+          "default": [],
+          "scope": "window",
+          "order": 2,
+          "items": {
+            "type": "string",
+            "format": "color-hex",
+            "pattern": "^#(?:[0-9A-Fa-f]{3,4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$",
+            "patternErrorMessage": "Use #RGB, #RGBA, #RRGGBB, or #RRGGBBAA."
+          },
+          "markdownDescription": "Custom nesting colors in depth order. [Open Color Picker](command:rainbowPascal.openColorPicker) or leave empty to use the active theme's bracket colors."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node --test out/test/colors.test.js out/test/lexer.test.js out/test/parser.test.js",
+    "package": "npm run compile && vsce package --no-dependencies --allow-missing-repository --skip-license"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.6.0",
+    "typescript": "^5.5.0"
+  }
+}
