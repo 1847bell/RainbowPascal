@@ -4,7 +4,23 @@
   "description": "Structural rainbow coloring for Pascal begin/end and if/then/else keywords.",
   "icon": "image/icon.png",
   "version": "0.3.0",
-  "publisher": "local",
+  "publisher": "1847bell",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1847bell/RainbowPascal.git"
+  },
+  "homepage": "https://github.com/1847bell/RainbowPascal#readme",
+  "bugs": {
+    "url": "https://github.com/1847bell/RainbowPascal/issues"
+  },
+  "keywords": [
+    "pascal",
+    "delphi",
+    "object-pascal",
+    "rainbow",
+    "syntax-highlighting"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -53,10 +69,11 @@
     }
   },
   "scripts": {
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "npm run compile && node --test out/test/colors.test.js out/test/lexer.test.js out/test/parser.test.js",
-    "package": "npm run compile && vsce package --no-dependencies --allow-missing-repository --skip-license"
+    "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
